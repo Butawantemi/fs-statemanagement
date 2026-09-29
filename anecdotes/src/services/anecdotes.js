@@ -4,10 +4,25 @@ const getAll = async () => {
   const response = await fetch(baseUrl);
 
   if (!response.ok) {
-    throw new Error("Failed to fetch notes");
+    throw new Error("Failed to fetch anecdotes");
   }
 
   return await response.json();
 };
 
-export default {getAll}
+const update = async (id, anecdote) => {
+    const response = await fetch(`${baseUrl}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(anecdote)
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to vote");
+    }
+
+    return await response.json()
+}
+
+
+export default {getAll, update}
