@@ -44,9 +44,12 @@ const useAnecdoteStore = create((set, get) => ({
   },
 }));
 
+export default useAnecdoteStore;
+
 export const useAnecdotes = () => {
-  const anecdotes = useAnecdoteStore((state) => state.anecdotes);
+  let anecdotes = useAnecdoteStore((state) => state.anecdotes);
   const filter = useAnecdoteStore((state) => state.filter);
+  anecdotes = anecdotes.toSorted((a, b) => b.votes - a.votes);
 
   if (filter !== "") {
     return anecdotes.filter((anecdote) =>
