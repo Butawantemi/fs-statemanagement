@@ -12,12 +12,9 @@ const Anecdote = ({ anecdote }) => {
       <div>
         has {anecdote.votes}
         <button onClick={() => vote(anecdote.id)}>vote</button>
-        <button
-          onClick={() => removeAnecdote(anecdote.id)}
-          disabled={anecdote.votes > 0}
-        >
-          delete
-        </button>
+        {anecdote.votes === 0 && (
+          <button onClick={() => removeAnecdote(anecdote.id)}>delete</button>
+        )}
       </div>
     </div>
   );

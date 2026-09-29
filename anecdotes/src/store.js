@@ -15,7 +15,7 @@ const useAnecdoteStore = create((set, get) => ({
       set((state) => ({
         anecdotes: state.anecdotes.map((a) => (a.id === id ? updated : a)),
       }));
-      get().actions.setNotification(`You voted '${anecdote.content}'`);
+      get().actions.setNotification(`you voted '${anecdote.content}'`);
       setTimeout(() => {
         get().actions.setNotification(null);
       }, 5000);
