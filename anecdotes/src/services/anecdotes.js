@@ -11,18 +11,31 @@ const getAll = async () => {
 };
 
 const update = async (id, anecdote) => {
-    const response = await fetch(`${baseUrl}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(anecdote)
-    })
+  const response = await fetch(`${baseUrl}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(anecdote),
+  });
 
+  if (!response.ok) {
+    throw new Error("Failed to vote");
+  }
+
+  return await response.json();
+};
+
+const createNew = async (anecdote) => {
+  const response = await fetch(baseUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(anecdote),
+  });
+    
     if (!response.ok) {
-      throw new Error("Failed to vote");
+      throw new Error("Failed to create a new anecdote");
     }
 
-    return await response.json()
-}
+    return await response.json();
+};
 
-
-export default {getAll, update}
+export default { getAll, update, createNew };

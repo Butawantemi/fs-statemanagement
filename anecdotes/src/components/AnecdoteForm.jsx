@@ -3,12 +3,10 @@ import { useAnecdotesControls } from "../store";
 const AnecdoteForm = () => {
   const { addAnecdote } = useAnecdotesControls();
 
-  const getId = () => (100000 * Math.random()).toFixed(0);
-
   const handleAddAnecdote = (e) => {
     e.preventDefault();
     const content = e.target.anecdote.value;
-    addAnecdote({ content: content, id: getId(), votes: 0 });
+    addAnecdote({ content: content, votes: 0 });
     e.target.reset();
   };
 

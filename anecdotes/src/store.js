@@ -15,8 +15,11 @@ const useAnecdoteStore = create((set, get) => ({
         anecdotes: state.anecdotes.map((a) => (a.id === id ? updated : a)),
       }));
     },
-    addAnecdote: (anecdote) =>
-      set((state) => ({ anecdotes: [...state.anecdotes, anecdote] })),
+    addAnecdote: async (anecdote) => {
+      const newAnecdote = await anecdoteService.createNew(anecdote)
+
+      set((state) => ({anecdotes: [...state.anecdotes, newAnecdote ]}))
+    },
     setFilter: (value) => set(() => ({ filter: value })),
     setAnecdote: async () => {
       const fetchAnecdotes = await anecdoteService.getAll();
