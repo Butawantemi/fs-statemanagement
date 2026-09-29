@@ -38,4 +38,14 @@ const createNew = async (anecdote) => {
     return await response.json();
 };
 
-export default { getAll, update, createNew };
+const deleteAnecdote = async (id) => {
+    const response = await fetch(`${baseUrl}/${id}`, {
+        method: "DELETE"
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to create a new anecdote");
+    }
+}
+
+export default { getAll, update, createNew, deleteAnecdote};

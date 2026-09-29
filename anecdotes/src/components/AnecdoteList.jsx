@@ -1,24 +1,15 @@
-import { useAnecdotes, useAnecdotesControls } from "../store";
+import { useAnecdotes } from "../store";
+import Anecdote from "./Anecdote";
 
 const AnecdoteList = () => {
   const anecdotes = useAnecdotes();
-  const { addVote } = useAnecdotesControls();
 
-  const vote = (id) => {
-    addVote(id);
-  };
   return (
     <div>
       {[...anecdotes]
         .toSorted((a, b) => b.votes - a.votes)
         .map((anecdote) => (
-          <div key={anecdote.id}>
-            <div>{anecdote.content}</div>
-            <div>
-              has {anecdote.votes}
-              <button onClick={() => vote(anecdote.id)}>vote</button>
-            </div>
-          </div>
+          <Anecdote anecdote={anecdote} key={anecdote.id}/>
         ))}
     </div>
   );
